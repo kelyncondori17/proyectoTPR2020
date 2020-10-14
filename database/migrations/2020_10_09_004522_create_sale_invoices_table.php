@@ -14,15 +14,14 @@ class CreateSaleInvoicesTable extends Migration
     public function up()
     {
         Schema::create('sale_invoices', function (Blueprint $table) {
-            $table->id('id_sale_invoice');
-            $table->integer('id_sale');
-            $table->integer('id_article');
-            $table->double('price');
+            $table->id();
+            $table->unsignedBigInteger('id_sale');
+            $table->unsignedBigInteger('id_article');
+            $table->string('price');
             $table->string('total');
+            $table->foreign('id_sale')->references('id')->on('sales');
+            $table->foreign('id_article')->references('id')->on('articles');
             $table->timestamps();
-            //relation
-            $table->foreing('id_sale')->references('id_sale')->on('sales');
-            $table->foreing('id_article')->references('id_article')->on('articles');
         });
     }
 

@@ -14,15 +14,14 @@ class CreateShoppingInvoicesTable extends Migration
     public function up()
     {
         Schema::create('shopping_invoices', function (Blueprint $table) {
-            $table->id('id_shopping_invoice');
-            $table->integer('id_shopping');
-            $table->integer('id_article');
-            $table->double('price');
+            $table->id();
+            $table->unsignedBigInteger('id_shopping');
+            $table->unsignedBigInteger('id_article');
+            $table->string('price');
             $table->string('total');
+            $table->foreign('id_shopping')->references('id')->on('shoppings');
+            $table->foreign('id_article')->references('id')->on('articles');
             $table->timestamps();
-            //relation
-            $table->foreing('id_shopping')->references('id_shopping')->on('shoppings');
-            $table->foreing('id_article')->references('id_article')->on('articles');
         });
     }
 

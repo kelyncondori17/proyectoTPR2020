@@ -14,15 +14,14 @@ class CreateShoppingsTable extends Migration
     public function up()
     {
         Schema::create('shoppings', function (Blueprint $table) {
-            $table->id('id_shopping');
-            $table->integer('id_provider');
-            $table->integer('id_personal');
+            $table->id();
+            $table->unsignedBigInteger('id_provider');
+            $table->unsignedBigInteger('id_personal');
             $table->date('shopping_date');
             $table->string('shopping_quantity');
+            $table->foreign('id_provider')->references('id')->on('providers');
+            $table->foreign('id_personal')->references('id')->on('personals');
             $table->timestamps();
-            //relation
-            $table->foreing('id_provider')->references('id_provider')->on('providers');
-            $table->foreing('id_personal')->references('id_personal')->on('personals');
         });
     }
 

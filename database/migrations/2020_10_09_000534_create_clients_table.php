@@ -14,11 +14,13 @@ class CreateClientsTable extends Migration
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->id('id_client');
-            $table->integer('id_user');
+            $table->id();
+            $table->string('name');
+            $table->string('surname');
+            $table->string('direction');
+            $table->string('phone');
+            $table->string('password');
             $table->timestamps();
-            //relation
-            $table->foreing('id_user')->references('id_user')->on('users');
         });
     }
 
