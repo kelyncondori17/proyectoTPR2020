@@ -7,21 +7,22 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        //
+        return view('category.index', [
+            'categories'=>Category::get()
+        ]);
+        //->addColumn('action',function($categories){
+            $acciones = '<a href="" class="btn btn-info btn-sm"> Editar </a>';
+            $acciones .= '&nbsp;&nbsp;<button type="button" name="delete" id="" class="btn btn-danger btn-sm"> Eliminar </button>';
+            return $acciones;
+        //})
+        //->rawColumns(['action'])
+        //->make(true);
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
@@ -35,7 +36,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$request->description];
+        return back();
     }
 
     /**
