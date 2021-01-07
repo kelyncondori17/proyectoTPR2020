@@ -16,11 +16,11 @@ class CreateShoppingTable extends Migration
         Schema::create('shopping', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_provider');
-            $table->unsignedBigInteger('id_personal');
+            $table->unsignedBigInteger('id_employee');
             $table->date('shopping_date');
             $table->string('shopping_quantity');
             $table->foreign('id_provider')->references('id')->on('providers');
-            $table->foreign('id_personal')->references('id')->on('personal');
+            $table->foreign('id_employee')->references('id')->on('employees');
             $table->timestamps();
         });
     }

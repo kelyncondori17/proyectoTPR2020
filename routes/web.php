@@ -7,7 +7,8 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SaleController;
-
+use App\Http\Controllers\ShoppingController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,6 @@ Route::resource('articles', ArticleController::class);
 Route::resource('positions', PositionController::class);
 Route::resource('employees', EmployeeController::class);
 Route::resource('sales', SaleController::class);
+Route::resource('shopping', ShoppingController::class);
+Route::resource('clients', ClientController::class);
+

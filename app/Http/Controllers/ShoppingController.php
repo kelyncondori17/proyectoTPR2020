@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shopping;
+use App\Models\Provider;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class ShoppingController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +17,12 @@ class ShoppingController extends Controller
      */
     public function index()
     {
-        //
+        $shoppings=Shopping::with("provider","employee")->paginate(15);
+        return view("shopping.index", compact("shoppings"),[
+            "providers"=>Provider::get(),
+            "employees"=>Employee::get()
+        ]);
+        
     }
 
     /**
@@ -24,7 +32,13 @@ class ShoppingController extends Controller
      */
     public function create()
     {
-        //
+        $providers=Provider::get();
+        $employees=Employee::get();
+        $shopping=new Shopping;
+        $title= __("Añadir Shopping");
+        $textButton=__("Crear");
+        $route=route("shopping.store");
+        return view("shopping.create", compact("title", "textButton", "route","shopping","providers","employees"));
     }
 
     /**
@@ -35,7 +49,15 @@ class ShoppingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            "id_provider"=>"required",
+            "id_employee"=>"required",
+            "shopping_date"=>"required",
+            "shopping_quantity"=>"required"
+        ]);
+        Shopping::create($request->only("id_provider","id_employee","shopping_date","shopping_quantity"));
+        return redirect(route("shopping.index"))
+            ->with("success", __("Shopping registrado!"));
     }
 
     /**
@@ -57,7 +79,13 @@ class ShoppingController extends Controller
      */
     public function edit(Shopping $shopping)
     {
-        //
+        $update=true;
+        $title= __("Editar datos de la Compra");
+        $providers=Provider::get();
+        $employees=Employee::get();
+        $textButton= __("Actualizar");
+        $route=route("shopping.update",["shopping"=>$shopping]);
+        return view("shopping.edit", compact("update","title","providers","employees","shopping","textButton","route"));
     }
 
     /**
@@ -69,7 +97,14 @@ class ShoppingController extends Controller
      */
     public function update(Request $request, Shopping $shopping)
     {
-        //
+        $this->validate($request,[
+            "id_provider"=>"required",
+            "id_employee"=>"required",
+            "shopping_date"=>"required",
+            "shopping_quantity"=>"required",
+        ]);
+        $shopping->fill($request->only("id_provider","id_employee","shopping_date","shopping_quantity"))->save();
+        return redirect(route("shopping.index"))->with("success", __("Datos actualizados"));
     }
 
     /**
@@ -80,6 +115,7 @@ class ShoppingController extends Controller
      */
     public function destroy(Shopping $shopping)
     {
-        //
+        $shopping->delete();
+        return back()->with("success", __("Datos del articulo eliminados"));
     }
 }

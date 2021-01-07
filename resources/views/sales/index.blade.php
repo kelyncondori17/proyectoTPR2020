@@ -12,6 +12,7 @@
     <table class="border-separate border-2 text-center border-gray-500 mt-3" style="width: 100%">
         <thead>
             <tr>
+            <th class="px-4 py-2">{{ __("Nro")}}</th>
             <th class="px-4 py-2">{{ __("Cantidad")}}</th>
             <th class="px-4 py-2">{{ __("Nombre del personal")}}</th>
             <th class="px-4 py-2">{{ __("Nombre del usuario")}}</th>
@@ -22,20 +23,27 @@
         <tbody>
             @forelse($sales as $sale)
                 <tr>
+                     <td class="border px-4 py-2">{{ $sale->id }}</td>
                     <td class="border px-4 py-2">{{ $sale->quantity }}</td>
                    
-                    
-
                     @foreach($employees as $employee)
-                    @if($employee->id_employee == $employee->id)
-                    <td class="border px-4 py-2">{{ $employee->name}}</td>
+                    @if($sale->id_employee == $employee->id)
+                    <td class="border px-4 py-2">{{ $employee->name}} {{ $employee->surname}}</td>
                     @endif
                     @endforeach
+
+
+                    @foreach($clients as $client)
+                    @if($sale->id_client == $client->id)
+                    <td class="border px-4 py-2">{{ $client->name}} {{ $client->surnames}}</td>
+                    @endif
+                    @endforeach
+
 
                     <td class="border px-4 py-2">{{ $sale->date }}</td>
                     
                  
-                    <td class="border px-4 py-2">{{ date_format($sale->created_at, "d/m/Y") }}</td>
+                   
                     <td class="border px-4 py-2">
                         <a href="{{ route("sales.edit", ["sale" => $sale]) }}" class="text-blue-400">{{ __("Editar") }}</a> |
                         <a

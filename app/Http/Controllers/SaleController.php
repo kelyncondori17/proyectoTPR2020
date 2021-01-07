@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use App\Models\Employee;
-
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -19,9 +19,10 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales=Sale::with("personal","user")->paginate(15);
+        $sales=Sale::with("employee","client")->paginate(15);
         return view("sales.index", compact("sales"),[
-            "employees"=>Employee::get()
+            "employees"=>Employee::get(),
+            "clients"=>Client::get()
         ]);
     
     }
@@ -32,13 +33,14 @@ class SaleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
         $employees=Employee::get();
+        $clients=Client::get();
         $sale=new Sale;
         $title= __("Añadir Sale");
         $textButton=__("Crear");
         $route=route("sales.store");
-        return view("sales.create", compact("title", "textButton", "route","sale","employees"));
+        return view("sales.create", compact("title", "textButton", "route","sale","employees","clients"));
     
     }
 
@@ -51,11 +53,12 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            "id_employee"=>"required|max:90",
+            "id_employee"=>"required",
+            "id_client"=>"required",
             "quantity"=>"required",
             "date"=>"required"
         ]);
-        Sale::create($request->only("id_employee","quantity","date"));
+        Sale::create($request->only("id_employee","id_client","quantity","date"));
         return redirect(route("sales.index"))
             ->with("success", __("Sale registrado!"));
     }
@@ -79,7 +82,13 @@ class SaleController extends Controller
      */
     public function edit(Sale $sale)
     {
-        //
+        $update=true;
+        $title= __("Editar datos de la Venta");
+        $employees=Employee::get();
+        $clients=Client::get();
+        $textButton= __("Actualizar");
+        $route=route("sales.update",["sale"=>$sale]);
+        return view("sales.edit", compact("update","title","employees","clients","sale","textButton","route"));
     }
 
     /**
@@ -91,7 +100,14 @@ class SaleController extends Controller
      */
     public function update(Request $request, Sale $sale)
     {
-        //
+        $this->validate($request,[
+            "quantity"=>"required",
+            "id_employee"=>"required",
+            "id_client"=>"required",
+            "date"=>"required",
+        ]);
+        $sale->fill($request->only("quantity","id_employee","id_client","date"))->save();
+        return redirect(route("sales.index"))->with("success", __("Datos actualizados"));
     }
 
     /**
@@ -102,6 +118,7 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-        //
+        $sale->delete();
+        return back()->with("success", __("Datos de la venta eliminados"));
     }
 }
