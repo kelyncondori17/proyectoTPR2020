@@ -22,6 +22,9 @@ class CreateShoppingTable extends Migration
             $table->foreign('id_provider')->references('id')->on('providers');
             $table->foreign('id_employee')->references('id')->on('employees');
             $table->timestamps();
+
+
+            
         });
     }
 

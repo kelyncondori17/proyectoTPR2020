@@ -4,21 +4,24 @@
 <html>
 <title>Tienda Virtual L & K</title>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="{{ asset('css/whatsapp.css')}}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="{{ asset('css/whatsapp.css') }}">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 </style>
 <body class="w3-theme-l5" background="img/9.jpg">
+
 <!-- Whatsapp -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <a href="https://api.whatsapp.com/send?phone=59172946565&text=Hola%20sean%20bienvenidos%20!" class="float" target="_blank">
 <i class="fa fa-whatsapp my-float"></i>
 </a>
+
 <!-- Navbar -->
 
 <!-- Navbar on small screens -->
@@ -30,7 +33,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 </div>
 
 <!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:20px">    
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->

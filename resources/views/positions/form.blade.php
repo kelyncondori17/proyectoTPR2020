@@ -25,6 +25,7 @@
     </div>
 
 
+<script data-ad-client="ca-pub-3965799032096926" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
    
 
@@ -35,4 +36,5 @@
             </button>
         </div>
     </div>
+
 </form>

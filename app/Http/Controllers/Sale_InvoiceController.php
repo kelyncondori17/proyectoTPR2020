@@ -80,6 +80,8 @@ class Sale_InvoiceController extends Controller
      */
     public function destroy(Sale_Invoice $sale_Invoice)
     {
-            //
+        Sale::destroy($id);
+
+
     }
 }

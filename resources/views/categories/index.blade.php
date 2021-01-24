@@ -47,3 +47,5 @@
 </table>
 {{ $categories->links() }}
 </x-app-layout>
+
+

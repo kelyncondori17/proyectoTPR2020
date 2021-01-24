@@ -29,12 +29,13 @@ class Employee extends Model
     }
 
 
+
     public function sales(){
         return $this->hasmany('App\Sale');
     }
 
 
-    public function shopping(){
+    public function shoppings(){
         return $this->hasmany('App\Shopping');
     }
 

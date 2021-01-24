@@ -15,20 +15,4 @@ class Provider extends Model
         'direction',
         'phone',
     ];
-    public function position(){
-        return $this->belongsTo(Position::class);
-    }
-
-
-    public function sales(){
-        return $this->hasmany('App\Sale');
-    }
-
-
-    public function shopping(){
-        return $this->hasmany('App\Shopping');
-    }
-
-
-    use HasFactory;
 }

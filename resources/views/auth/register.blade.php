@@ -1,8 +1,11 @@
+</div>
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
         </x-slot>
+
+        <script src="https://www.google.com/recaptcha/api.js"></script>
 
         <x-jet-validation-errors class="mb-4" />
 
@@ -13,22 +16,7 @@
                 <x-jet-label for="name" value="{{ __('Name') }}" />
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
-            <div>
-                <x-jet-label for="surname" value="{{ __('Surname') }}" />
-                <x-jet-input id="surname" class="block mt-1 w-full" type="text" name="surname" :value="old('surname')" required autofocus autocomplete="surname" />
-            </div>
-
-            <div>
-                <x-jet-label for="direction" value="{{ __('Direction') }}" />
-                <x-jet-input id="direction" class="block mt-1 w-full" type="text" name="direction" :value="old('direction')" required autofocus autocomplete="direction" />
-            </div>
-
-
-            <div>
-                <x-jet-label for="phone" value="{{ __('Phone') }}" />
-                <x-jet-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required autofocus autocomplete="phone" />
-            </div>
-
+           
             <div class="mt-4">
                 <x-jet-label for="email" value="{{ __('Email') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
@@ -43,6 +31,10 @@
                 <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                 <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
+            
+<br>
+
+            <div class="g-recaptcha" data-sitekey="6LfK0yQaAAAAAKwvkEKdwfp_xxNl-_ANAwWZ-oCH"></div>
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
